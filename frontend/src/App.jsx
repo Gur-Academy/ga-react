@@ -1,10 +1,33 @@
-function App() {
-  return (
-    <div className='flex items-center'>
-      <img className="logo " src="/logo.png" alt="logo" />
-      <h1 className="text-blue-600 text-xl">Gur Academy</h1>
-    </div>
-  )
-}
+// import {
+//   Route,
+//   createBrowserRouter,
+//   createRoutesFromElements,
+//   RouterProvider
+// } 
+// from 'react-router-dom';
+// import Layout1 from "./Layout/layout1";
+// import Homepage from './Pages/Homepage';
+// import Aboutpage from './Pages/Aboutpage';
+// import Contactpage from './Pages/Contactpage';
 
-export default App
+// const router = createBrowserRouter(
+//   createRoutesFromElements(
+//     <Route path='/' element={<Layout1 />} >
+//       <Route index element={<Homepage />} />
+//       <Route path='/About' element={<Aboutpage />} />
+//       <Route path='/Contact' element={<Contactpage />} />
+//     </Route>
+//   )
+// );
+
+
+// function App() {
+//   return (
+//     <>
+//       <RouterProvider router={router} />
+//     </>
+   
+//   )
+// }
+
+// export default App;
