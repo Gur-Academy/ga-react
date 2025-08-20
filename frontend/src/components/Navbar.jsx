@@ -79,7 +79,7 @@ function Navbar() {
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Gur Academy Logo" className="h-8 w-8" />
             <span className="font-bold text-xl tracking-wide text-[#f7c873]">Gur Academy</span>
-          </Link>
+          </Link> 
 
           <div className="hidden md:flex items-center gap-6">
             {NAV_ITEMS.map((item) =>
