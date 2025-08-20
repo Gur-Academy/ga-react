@@ -42,6 +42,32 @@ function Navbar() {
   const [schoolDropdownOpen, setSchoolDropdownOpen] = useState(false);
   const [classOpen, setClassOpen] = useState(false);
 
+ 
+  const classDropdownTimer = React.useRef(null);
+  const schoolDropdownTimer = React.useRef(null);
+
+  
+  const handleClassMouseEnter = () => {
+    if (classDropdownTimer.current) clearTimeout(classDropdownTimer.current);
+    setClassDropdownOpen(true);
+  };
+  const handleClassMouseLeave = () => {
+    classDropdownTimer.current = setTimeout(() => {
+      setClassDropdownOpen(false);
+    }, 200); 
+  };
+
+  
+  const handleSchoolMouseEnter = () => {
+    if (schoolDropdownTimer.current) clearTimeout(schoolDropdownTimer.current);
+    setSchoolDropdownOpen(true);
+  };
+  const handleSchoolMouseLeave = () => {
+    schoolDropdownTimer.current = setTimeout(() => {
+      setSchoolDropdownOpen(false);
+    }, 200); 
+  };
+
   return (
     <nav
       className="bg-[#0a2342] text-white shadow-lg sticky top-0 z-50"
@@ -61,8 +87,8 @@ function Navbar() {
                 <div
                   className="relative"
                   key={item.name}
-                  onMouseEnter={() => setClassDropdownOpen(true)}
-                  onMouseLeave={() => setClassDropdownOpen(false)}
+                  onMouseEnter={handleClassMouseEnter}
+                  onMouseLeave={handleClassMouseLeave}
                 >
                   <button
                     className="px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-[#19376d] hover:text-[#f7c873] focus:outline-none"
@@ -78,8 +104,8 @@ function Navbar() {
                           <div
                             className="relative"
                             key={sub.name}
-                            onMouseEnter={() => setSchoolDropdownOpen(true)}
-                            onMouseLeave={() => setSchoolDropdownOpen(false)}
+                            onMouseEnter={handleSchoolMouseEnter}
+                            onMouseLeave={handleSchoolMouseLeave}
                           >
                             <button className="block w-full text-left px-4 py-2 hover:bg-[#f7c873] hover:text-[#0a2342] transition-colors duration-200">
                               {sub.name}
