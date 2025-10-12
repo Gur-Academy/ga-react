@@ -76,10 +76,10 @@ const APPS = [
 ];
 function Footer() {
   return (
-    <footer className="bg-[#0a2342] text-white py-8 mt-12">
+    <footer className="bg-primary-900 text-white py-8 mt-12">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-2 mb-4 md:mb-0">
-          <span className="font-bold text-lg tracking-wide text-[#f7c873]">Gur Academy</span>
+          <span className="font-bold text-lg tracking-wide text-secondary-500">Gur Academy</span>
         </div>
 
         <div className="flex flex-wrap gap-4 justify-center">
@@ -87,7 +87,7 @@ function Footer() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm hover:text-[#f7c873] transition-colors duration-200"
+              className="text-sm hover:text-secondary-500 transition-colors duration-200"
             >
               {link.name}
             </a>
@@ -103,7 +103,7 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="hover:text-[#f7c873] transition-colors duration-200"
+                className="hover:text-secondary-500 transition-colors duration-200"
               >
                 {social.icon}
               </a>
@@ -117,7 +117,7 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={app.name}
-                className="hover:text-[#f7c873] transition-colors duration-200"
+                className="hover:text-secondary-500 transition-colors duration-200"
               >
                 {app.icon}
               </a>

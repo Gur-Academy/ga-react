@@ -32,8 +32,8 @@ const NAV_ITEMS = [
 ];
 
 const AuthButtons = [
-  { name: "Login", href: "/login" },
-  { name: "Signup", href: "/signup" },
+  { name: "Login", href: "/auth/login" },
+  { name: "Signup", href: "/auth/signup" },
 ];
 
 function Navbar() {
@@ -68,9 +68,35 @@ function Navbar() {
     }, 200); 
   };
 
+ 
+  const classDropdownTimer = React.useRef(null);
+  const schoolDropdownTimer = React.useRef(null);
+
+  
+  const handleClassMouseEnter = () => {
+    if (classDropdownTimer.current) clearTimeout(classDropdownTimer.current);
+    setClassDropdownOpen(true);
+  };
+  const handleClassMouseLeave = () => {
+    classDropdownTimer.current = setTimeout(() => {
+      setClassDropdownOpen(false);
+    }, 200); 
+  };
+
+  
+  const handleSchoolMouseEnter = () => {
+    if (schoolDropdownTimer.current) clearTimeout(schoolDropdownTimer.current);
+    setSchoolDropdownOpen(true);
+  };
+  const handleSchoolMouseLeave = () => {
+    schoolDropdownTimer.current = setTimeout(() => {
+      setSchoolDropdownOpen(false);
+    }, 200); 
+  };
+
   return (
     <nav
-      className="bg-[#0a2342] text-white shadow-lg sticky top-0 z-50"
+      className="bg-primary-900 text-white shadow-lg sticky top-0 z-50"
       aria-label="Main Navigation"
       role="navigation"
     >
@@ -89,16 +115,18 @@ function Navbar() {
                   key={item.name}
                   onMouseEnter={handleClassMouseEnter}
                   onMouseLeave={handleClassMouseLeave}
+                  onMouseEnter={handleClassMouseEnter}
+                  onMouseLeave={handleClassMouseLeave}
                 >
                   <button
-                    className="px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-[#19376d] hover:text-[#f7c873] focus:outline-none"
+                    className="px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-primary-700 hover:text-secondary-500 focus:outline-none"
                     aria-haspopup="true"
                     aria-expanded={classDropdownOpen}
                   >
                     {item.name}
                   </button>
                   {classDropdownOpen && (
-                    <div className="absolute left-0 mt-2 w-48 bg-white text-[#0a2342] rounded-md shadow-lg z-10">
+                    <div className="absolute left-0 mt-2 w-48 bg-neutral-100 text-primary-900 rounded-md shadow-lg z-10">
                       {item.dropdown.map((sub) =>
                         sub.dropdown ? (
                           <div
@@ -106,17 +134,19 @@ function Navbar() {
                             key={sub.name}
                             onMouseEnter={handleSchoolMouseEnter}
                             onMouseLeave={handleSchoolMouseLeave}
+                            onMouseEnter={handleSchoolMouseEnter}
+                            onMouseLeave={handleSchoolMouseLeave}
                           >
-                            <button className="block w-full text-left px-4 py-2 hover:bg-[#f7c873] hover:text-[#0a2342] transition-colors duration-200">
+                            <button className="block w-full text-left px-4 py-2 hover:bg-secondary-500 hover:text-primary-900 transition-colors duration-200">
                               {sub.name}
                             </button>
                             {schoolDropdownOpen && (
-                              <div className="absolute left-full top-0 mt-0 ml-2 w-40 bg-white text-[#0a2342] rounded-md shadow-lg z-20">
+                              <div className="absolute left-full top-0 mt-0 ml-2 w-40 bg-neutral-100 text-primary-900 rounded-md shadow-lg z-20">
                                 {sub.dropdown.map((cls) => (
                                   <Link
                                     key={cls.name}
                                     to={cls.href}
-                                    className="block px-4 py-2 hover:bg-[#f7c873] hover:text-[#0a2342] transition-colors duration-200"
+                                    className="block px-4 py-2 hover:bg-secondary-500 hover:text-primary-900 transition-colors duration-200"
                                   >
                                     {cls.name}
                                   </Link>
@@ -128,7 +158,7 @@ function Navbar() {
                           <Link
                             key={sub.name}
                             to={sub.href}
-                            className="block px-4 py-2 hover:bg-[#f7c873] hover:text-[#0a2342] transition-colors duration-200"
+                            className="block px-4 py-2 hover:bg-secondary-500 hover:text-primary-900 transition-colors duration-200"
                           >
                             {sub.name}
                           </Link>
@@ -141,7 +171,7 @@ function Navbar() {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-[#19376d] hover:text-[#f7c873]"
+                  className="px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-primary-700 hover:text-secondary-500"
                 >
                   {item.name}
                 </Link>
@@ -152,7 +182,7 @@ function Navbar() {
               <Link
                 key={btn.name}
                 to={btn.href}
-                className="px-3 py-2 rounded-md font-medium border border-[#f7c873] text-[#f7c873] bg-[#0a2342] hover:bg-[#f7c873] hover:text-[#0a2342] transition-colors duration-200"
+                className="px-3 py-2 rounded-md font-medium border border-secondary-500 text-secondary-500 bg-primary-900 hover:bg-secondary-500 hover:text-primary-900 transition-colors duration-200"
               >
                 {btn.name}
               </Link>
@@ -162,7 +192,7 @@ function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-[#f7c873] focus:outline-none"
+              className="text-secondary-500 focus:outline-none"
               aria-label="Open menu"
             >
               <svg
@@ -184,25 +214,25 @@ function Navbar() {
         </div>
       </div>
       {menuOpen && (
-        <div className="md:hidden bg-[#0a2342] px-4 pb-4 pt-2 shadow-lg">
+        <div className="md:hidden bg-primary-900 px-4 pb-4 pt-2 shadow-lg">
           {NAV_ITEMS.map((item) =>
             item.dropdown ? (
               <div key={item.name} className="mb-2">
                 <button
                   onClick={() => setClassOpen(!classOpen)}
-                  className="w-full text-left px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-[#19376d] hover:text-[#f7c873] focus:outline-none"
+                  className="w-full text-left px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-primary-700 hover:text-secondary-500 focus:outline-none"
                   aria-haspopup="true"
                   aria-expanded={classOpen}
                 >
                   {item.name}
                 </button>
                 {classOpen && (
-                  <div className="ml-4 mt-1 bg-white text-[#0a2342] rounded-md shadow-lg">
+                  <div className="ml-4 mt-1 bg-neutral-100 text-primary-900 rounded-md shadow-lg">
                     {item.dropdown.map((sub) => (
                       <Link
                         key={sub.name}
                         to={sub.href}
-                        className="block px-4 py-2 hover:bg-[#f7c873] hover:text-[#0a2342] transition-colors duration-200"
+                        className="block px-4 py-2 hover:bg-secondary-500 hover:text-primary-900 transition-colors duration-200"
                       >
                         {sub.name}
                       </Link>
@@ -214,7 +244,7 @@ function Navbar() {
               <Link
                 key={item.name}
                 to={item.href}
-                className="block px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-[#19376d] hover:text-[#f7c873] mb-2"
+                className="block px-3 py-2 rounded-md font-medium transition-colors duration-200 hover:bg-primary-700 hover:text-secondary-500 mb-2"
               >
                 {item.name}
               </Link>
@@ -225,7 +255,7 @@ function Navbar() {
             <Link
               key={btn.name}
               to={btn.href}
-              className="block px-3 py-2 rounded-md font-medium border border-[#f7c873] text-[#f7c873] bg-[#0a2342] hover:bg-[#f7c873] hover:text-[#0a2342] transition-colors duration-200 mb-2"
+              className="block px-3 py-2 rounded-md font-medium border border-secondary-500 text-secondary-500 bg-primary-900 hover:bg-secondary-500 hover:text-primary-900 transition-colors duration-200 mb-2"
             >
               {btn.name}
             </Link>
