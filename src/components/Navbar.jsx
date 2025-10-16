@@ -68,6 +68,32 @@ function Navbar() {
     }, 200); 
   };
 
+ 
+  const classDropdownTimer = React.useRef(null);
+  const schoolDropdownTimer = React.useRef(null);
+
+  
+  const handleClassMouseEnter = () => {
+    if (classDropdownTimer.current) clearTimeout(classDropdownTimer.current);
+    setClassDropdownOpen(true);
+  };
+  const handleClassMouseLeave = () => {
+    classDropdownTimer.current = setTimeout(() => {
+      setClassDropdownOpen(false);
+    }, 200); 
+  };
+
+  
+  const handleSchoolMouseEnter = () => {
+    if (schoolDropdownTimer.current) clearTimeout(schoolDropdownTimer.current);
+    setSchoolDropdownOpen(true);
+  };
+  const handleSchoolMouseLeave = () => {
+    schoolDropdownTimer.current = setTimeout(() => {
+      setSchoolDropdownOpen(false);
+    }, 200); 
+  };
+
   return (
     <nav
       className="bg-primary-900 text-white shadow-lg sticky top-0 z-50"
@@ -78,7 +104,7 @@ function Navbar() {
         <div className="flex justify-between h-16 items-center">
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Gur Academy Logo" className="h-8 w-8" />
-            <span className="font-bold text-xl tracking-wide text-secondary-500">Gur Academy</span>
+            <span className="font-bold text-xl tracking-wide text-[#f7c873]">Gur Academy</span>
           </Link> 
 
           <div className="hidden md:flex items-center gap-6">
@@ -87,6 +113,8 @@ function Navbar() {
                 <div
                   className="relative"
                   key={item.name}
+                  onMouseEnter={handleClassMouseEnter}
+                  onMouseLeave={handleClassMouseLeave}
                   onMouseEnter={handleClassMouseEnter}
                   onMouseLeave={handleClassMouseLeave}
                 >
@@ -104,6 +132,8 @@ function Navbar() {
                           <div
                             className="relative"
                             key={sub.name}
+                            onMouseEnter={handleSchoolMouseEnter}
+                            onMouseLeave={handleSchoolMouseLeave}
                             onMouseEnter={handleSchoolMouseEnter}
                             onMouseLeave={handleSchoolMouseLeave}
                           >
